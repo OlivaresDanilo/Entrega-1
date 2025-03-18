@@ -2,6 +2,7 @@ import random
 import string
 string_digits = string.digits
 exit_status = 0
+score = 0
 # Preguntas para el juego
 questions = ["¿Qué función se usa para obtener la longitud de una cadena en Python?", "¿Cuál de las siguientes opciones es un número entero en Python?", "¿Cómo se solicita entrada del usuario en Python?", "¿Cuál de las siguientes expresiones es un comentario válido en Python?", "¿Cuál es el operador de comparación para verificar si dos valores son iguales?"
 ]
@@ -48,6 +49,7 @@ for _ in range(3):
     
         if user_answer == correct_answers_index[question_index]: 
             print("¡Correcto!")
+            score += 1
             break
         else:
             # Si el usuario no responde correctamente después de 2 intentos,
@@ -57,9 +59,13 @@ for _ in range(3):
             else:
                 print("Incorrecto. La respuesta correcta es:")
                 print(answers[question_index][correct_answers_index[question_index]])
+            score -= 0.5
             
     if exit_status == 1:
         break
                 
     # Se imprime un blanco al final de la pregunta
     print()
+    
+print("Fin del juego")
+print(f'Puntaje total obtenido: {score}')
