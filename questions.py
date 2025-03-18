@@ -1,4 +1,7 @@
 import random
+import string
+string_digits = string.digits
+exit_status = 0
 # Preguntas para el juego
 questions = ["¿Qué función se usa para obtener la longitud de una cadena en Python?", "¿Cuál de las siguientes opciones es un número entero en Python?", "¿Cómo se solicita entrada del usuario en Python?", "¿Cuál de las siguientes expresiones es un comentario válido en Python?", "¿Cuál es el operador de comparación para verificar si dos valores son iguales?"
 ]
@@ -30,18 +33,33 @@ for _ in range(3):
         
     # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        user_answer = int(input("Respuesta: ")) - 1
+        user_answer = input("Respuesta: ")
+        if not user_answer.isdigit():
+            print("Respuesta no válida")
+            exit_status = 1
+            break
         
-    # Se verifica si la respuesta es correcta
-        if user_answer == correct_answers_index[question_index]:
+        user_answer = int(user_answer) - 1
+        
+        if not (0 <= user_answer <= 3):
+            print("Respuesta no válida")
+            exit_status = 1
+            break
+    
+        if user_answer == correct_answers_index[question_index]: 
             print("¡Correcto!")
             break
-    else:
-        # Si el usuario no responde correctamente después de 2 intentos,
-        # se muestra la respuesta correcta
-            print("Incorrecto. La respuesta correcta es:")
-            print(answers[question_index]
-            [correct_answers_index[question_index]])
-        
+        else:
+            # Si el usuario no responde correctamente después de 2 intentos,
+            # se muestra la respuesta correcta
+            if intento == 0:
+                print("Incorrecto, intenta de nuevo")
+            else:
+                print("Incorrecto. La respuesta correcta es:")
+                print(answers[question_index][correct_answers_index[question_index]])
+            
+    if exit_status == 1:
+        break
+                
     # Se imprime un blanco al final de la pregunta
     print()
